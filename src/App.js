@@ -23,10 +23,7 @@ function App() {
     setAlert({ show, type, msg });
   };
 
-  const clearList = () => {
-    showAlert(true, "danger", "empty list");
-    setDatas([]);
-  };
+
   const removeItem = (ID) => {
     showAlert(true, "danger", "item removed");
 
@@ -45,9 +42,7 @@ function App() {
       <h3>grocery bud</h3>
       <div className="grocery-container">
         <List items={datas} removeItem={removeItem} />
-        <button className="clear-btn" onClick={clearList}>
-          clear items
-        </button>
+
       </div>
     </section>
   );
