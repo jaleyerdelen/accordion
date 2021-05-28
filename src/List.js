@@ -5,7 +5,6 @@ const List = ({ items, removeItem }) => {
   return (
     <div className="grocery-list">
       {items.map((data) => {
-          console.log(data);
         const { ID, Name } = data;
         return (
           <article key={ID} className="grocery-item">

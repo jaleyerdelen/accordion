@@ -7,7 +7,6 @@ function App() {
   const [datas, setDatas] = useState([]);
 
   const setDatatoStorage = (data) => {
-    data = data;
     console.log("dattt", data);
     localStorage.setItem("item", JSON.stringify(data));
   };
@@ -23,12 +22,23 @@ function App() {
     setAlert({ show, type, msg });
   };
 
-
   const removeItem = (ID) => {
     showAlert(true, "danger", "item removed");
+    let item = localStorage.getItem("item");
+    const arrayOfData = JSON.parse(item);
+    arrayOfData.forEach((item, index) => {
+      if (ID === item.ID) {
+        arrayOfData.splice(index, 1);
+      }
+    });
+    setDatatoStorage(arrayOfData);
+    setDatas(arrayOfData);
+  };
 
-    setDatas(datas.filter((item) => item.ID !== ID));
-    setDatatoStorage(datas);
+  const clearList = () => {
+    showAlert(true, "danger", "empty list");
+    setDatas(data);
+    setDatatoStorage(data);
   };
 
   useEffect(() => {
@@ -42,7 +52,9 @@ function App() {
       <h3>grocery bud</h3>
       <div className="grocery-container">
         <List items={datas} removeItem={removeItem} />
-
+        <button className="clear-btn" onClick={clearList}>
+          clear items
+        </button>
       </div>
     </section>
   );
