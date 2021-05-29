@@ -4,10 +4,9 @@ import Alert from "./Alert";
 import data from "./data";
 
 function App() {
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState(data);
 
   const setDatatoStorage = (data) => {
-    console.log("dattt", data);
     localStorage.setItem("item", JSON.stringify(data));
   };
 
@@ -35,6 +34,7 @@ function App() {
     setDatas(arrayOfData);
   };
 
+  // It will be deleted
   const clearList = () => {
     showAlert(true, "danger", "empty list");
     setDatas(data);
@@ -42,7 +42,6 @@ function App() {
   };
 
   useEffect(() => {
-    //setDatatoStorage();
     getDataFromStorage();
   }, []);
 
