@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import List from "./List";
 import Alert from "./Alert";
 import data from "./data";
+import Toggle from "./Toggle"
 
 function App() {
   const [datas, setDatas] = useState(data);
@@ -50,11 +51,12 @@ function App() {
       {alert.show && <Alert {...alert} removeAlert={showAlert} list={datas} />}
       <h3>grocery bud</h3>
       <div className="grocery-container">
-        <List items={datas} removeItem={removeItem} />
+
         <button className="clear-btn" onClick={clearList}>
           clear items
         </button>
       </div>
+      <Toggle items={datas} removeItem={removeItem} />
     </section>
   );
 }
