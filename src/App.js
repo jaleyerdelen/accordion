@@ -6,15 +6,14 @@ import Toggle from "./Toggle";
 function App() {
   const [datas, setDatas] = useState(data);
 
-  const setDatatoStorage = (data) => {
-    localStorage.setItem("item", JSON.stringify(data));
-  };
+  useEffect(() => {
+    const item = localStorage.getItem("item");
+    setDatas(JSON.parse(item))
+  },[] )
 
-  const getDataFromStorage = () => {
-    const arrayOfData = localStorage.getItem("item");
-    const d = arrayOfData !== null ? JSON.parse(arrayOfData) : [];
-    setDatas(d);
-  };
+  useEffect(() => {
+    localStorage.setItem("item", JSON.stringify(datas));
+  });
 
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const showAlert = (show = false, type = "", msg = "") => {
@@ -23,20 +22,8 @@ function App() {
 
   const removeItem = (ID) => {
     showAlert(true, "danger", "item removed");
-    let item = localStorage.getItem("item");
-    const arrayOfData = JSON.parse(item);
-    arrayOfData.forEach((item, index) => {
-      if (ID === item.ID) {
-        arrayOfData.splice(index, 1);
-      }
-    });
-    setDatatoStorage(arrayOfData);
-    setDatas(arrayOfData);
+    setDatas(datas.filter(item => item.ID !== ID))
   };
-
-  useEffect(() => {
-    getDataFromStorage();
-  }, []);
 
   return (
     <section className="section-center">

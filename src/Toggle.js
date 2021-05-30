@@ -1,7 +1,6 @@
-import { Button, Accordion, Card } from "react-bootstrap";
+import { Accordion, Card } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import data from "./data";
-import { FaTrash, FaEdit } from "../node_modules/react-icons/fa";
+import { FaTrash } from "../node_modules/react-icons/fa";
 
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionToggle(eventKey, () =>
@@ -9,7 +8,7 @@ function CustomToggle({ children, eventKey }) {
   );
 
   return (
-    <a>
+    <a href>
       <button type="button" className="btns" onClick={decoratedOnClick}>
         {children}
       </button>
@@ -23,7 +22,7 @@ function Toggle({ items, removeItem }) {
       {items.map((data) => {
         const { ID, Name, Phone, City } = data;
         return (
-          <Accordion>
+          <Accordion key={data.ID}>
             <Card>
               <Card.Header>
                 <CustomToggle eventKey="0">{ID}</CustomToggle>
