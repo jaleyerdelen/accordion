@@ -60,7 +60,7 @@ Global Styles
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: var(--clr-grey-10);
+  background: #faf2f2;
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
@@ -147,7 +147,7 @@ Grocery List
 ===============
 */
 .section-center {
-  background: var(--clr-white);
+  background: #f3e1e1;
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
   transition: var(--transition);
@@ -200,7 +200,6 @@ Grocery List
   color: var(--clr-grey-5);
 }
 
-
 .grocery-container {
   margin-top: 2rem;
 }
@@ -240,12 +239,22 @@ Grocery List
 /* buttons*/
 .btns {
   width: 50px;
-  border-color: white;
+  background-color: #7d5a5a;
+  color: #faf2f5;
 }
 .delete-btns {
- 
   width: 50px;
-  border-color: white;
   margin-left: 50px;
-}  
+  background-color: #7d5a5a;
+  color: #faf2f5;
+}
+/* buttons end */
 
+.card-header {
+  background-color: #faf2f5;
+  display: flex;
+  justify-content: space-between;
+}
+.card-body {
+  background: #f9f3f3;
+}
