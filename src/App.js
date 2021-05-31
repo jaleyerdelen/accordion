@@ -4,16 +4,15 @@ import data from "./data";
 import Toggle from "./Toggle";
 
 function App() {
-  const [datas, setDatas] = useState(data);
-
-  useEffect(() => {
+  const [datas, setDatas] = useState(data, () => {
     const item = localStorage.getItem("item");
-    setDatas(JSON.parse(item))
-  },[] )
+    console.log(item);
+    return item ? JSON.parse(item) : []
+  });
 
   useEffect(() => {
     localStorage.setItem("item", JSON.stringify(datas));
-  });
+  },[datas]);
 
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const showAlert = (show = false, type = "", msg = "") => {
