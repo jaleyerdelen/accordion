@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Accordion, Card } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { FaTrash } from "../node_modules/react-icons/fa";
@@ -16,16 +17,16 @@ function CustomToggle({ children, eventKey }) {
   );
 }
 
-function Toggle({ items, removeItem }) {
+function Toggle({ items, removeItem, ID, nest }) {
   return (
     <div>
       {items.map((data) => {
-        const { ID, Name, Phone, City } = data;
+        const { ID, Name, Phone, City, parentID } = data;
         return (
-          <Accordion key={data.ID}>
+          <Accordion key={ID}>
             <Card>
               <Card.Header>
-                <CustomToggle eventKey="0">{ID}</CustomToggle>
+                <CustomToggle eventKey="0">{parentID}</CustomToggle>
                 <button
                   type="button"
                   className="delete-btns"
@@ -36,9 +37,15 @@ function Toggle({ items, removeItem }) {
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
-                  <p>Name: {Name}</p>
-                  <p>City: {City}</p>
-                  <p>Phone: {Phone}</p>
+                  <ul>
+                    <li> {ID} </li>
+                    <li> {City} </li>
+                    <li> {Phone} </li>
+                  </ul>
+                  <ul>
+                    <li>{ID}</li>
+                    <li>{City}</li>
+                  </ul>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
