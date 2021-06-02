@@ -24,20 +24,25 @@ function App() {
     setDatas(datas.filter((item) => item.ID !== ID));
   };
 
-  const nest = (items, ID, link = "parentID") =>
-    items
-      .filter((item) => item[link] === ID)
-      .map((item) => ({ ...item, children: nest(items, item.ID) }));
-  console.log(nest(data));
+  
+
+    let arr = [];
+    const nest = (items, ID, link = "parentID") =>
+      arr = items
+        .filter((item) => item[link] === ID)
+        .map((item) => ({ ...item, children: nest(items, item.ID) }));
+        
+    nest(data)
 
   return (
     <section className="section-center">
       {alert.show && <Alert {...alert} removeAlert={showAlert} list={datas} />}
       <h2 className="text-center">Collapse</h2>
       <div className="grocery-container"></div>
-      <Toggle items={datas} nest={nest} removeItem={removeItem} />
-    </section>
+      <Toggle  items={arr} removeItem={removeItem} /> 
+    </section> 
+   
   );
-}
+} 
 
 export default App;

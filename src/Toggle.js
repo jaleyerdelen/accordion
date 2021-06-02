@@ -4,9 +4,7 @@ import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { FaTrash } from "../node_modules/react-icons/fa";
 
 function CustomToggle({ children, eventKey }) {
-  const decoratedOnClick = useAccordionToggle(eventKey, () =>
-    console.log("Hello World")
-  );
+  const decoratedOnClick = useAccordionToggle(eventKey, () => {});
 
   return (
     <a href>
@@ -17,16 +15,18 @@ function CustomToggle({ children, eventKey }) {
   );
 }
 
-function Toggle({ items, removeItem, ID, nest }) {
+function Toggle({ items, removeItem }) {
+  console.log(items);
   return (
     <div>
-      {items.map((data) => {
-        const { ID, Name, Phone, City, parentID } = data;
+      {items.map((el) => {
+        const { ID, Name, Phone, City } = el;
+
         return (
           <Accordion key={ID}>
             <Card>
               <Card.Header>
-                <CustomToggle eventKey="0">{parentID}</CustomToggle>
+                <CustomToggle eventKey="0">{ID}</CustomToggle>
                 <button
                   type="button"
                   className="delete-btns"
@@ -42,10 +42,40 @@ function Toggle({ items, removeItem, ID, nest }) {
                     <li> {City} </li>
                     <li> {Phone} </li>
                   </ul>
-                  <ul>
-                    <li>{ID}</li>
-                    <li>{City}</li>
-                  </ul>
+
+                  {el.children.length > 0 &&
+                    el.children.map((item) => {
+                      const { ID, Phone, City, Name } = item;
+                      return (
+                        <ul>
+                          <li>{Phone}</li>
+                        </ul>
+                      );
+                    })}
+                  <Card>
+                    <Card.Header>
+                      <CustomToggle
+                        eventKey="1"
+                        onClick={() =>
+                          (CustomToggle.eventKey = "1"
+                            ? (CustomToggle.eventKey = "0")
+                            : (CustomToggle.eventKey = "1"))
+                        }
+                      >
+                        Click me!
+                      </CustomToggle>
+                    </Card.Header>
+                    <Accordion.Collapse
+                      eventKey="1"
+                      onClick={() =>
+                        (Accordion.eventKey = "1"
+                          ? (Accordion.eventKey = "0")
+                          : (Accordion.eventKey = "1"))
+                      }
+                    >
+                      <Card.Body>Hello! I'm another body</Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
