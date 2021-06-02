@@ -258,3 +258,14 @@ Grocery List
 .card-body {
   background: #f9f3f3;
 }
+.box {
+   border: 1px solid black;
+   padding: 5px;
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 25px;
+}
+
+.dsply {
+  display: none;
+}

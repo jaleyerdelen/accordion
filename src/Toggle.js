@@ -16,6 +16,7 @@ function CustomToggle({ children, eventKey }) {
 }
 
 function Toggle({ items, removeItem }) {
+  const [btnCheck, setBtnCheck] = useState(true);
   console.log(items);
   return (
     <div>
@@ -38,44 +39,48 @@ function Toggle({ items, removeItem }) {
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
                   <ul>
-                    <li> {ID} </li>
-                    <li> {City} </li>
-                    <li> {Phone} </li>
+                    <li>
+                      <b>Name:</b> {Name}
+                    </li>
+                    <li>
+                      <b>City:</b> {City}
+                    </li>
+                    <li>
+                      <b>ID:</b> {ID}
+                    </li>
+                    <li>
+                      <b>Phone:</b> {Phone}
+                    </li>
+                    {el.children.length > 0 &&
+                      el.children.map((item) => {
+                        const { ID, Phone, City, Name, parentID } = item;
+                        return (
+                          <ul
+                            type="button"
+                            id={ID}
+                            className="box"
+                            onClick={() => {
+                              setBtnCheck(!btnCheck);
+                            }}
+                          >
+                            <b>parentID:</b> {parentID}
+                            <li>
+                              <b>Name: </b> {btnCheck ? Name : ""}
+                            </li>
+                            <li>
+                              <b>City: </b>
+                              {btnCheck ? City : ""}
+                            </li>
+                            <li>
+                              <b>ID:</b> {btnCheck ? ID : ""}
+                            </li>
+                            <li>
+                              <b>Phone:</b> {btnCheck ? Phone : ""}
+                            </li>
+                          </ul>
+                        );
+                      })}
                   </ul>
-
-                  {el.children.length > 0 &&
-                    el.children.map((item) => {
-                      const { ID, Phone, City, Name } = item;
-                      return (
-                        <ul>
-                          <li>{Phone}</li>
-                        </ul>
-                      );
-                    })}
-                  <Card>
-                    <Card.Header>
-                      <CustomToggle
-                        eventKey="1"
-                        onClick={() =>
-                          (CustomToggle.eventKey = "1"
-                            ? (CustomToggle.eventKey = "0")
-                            : (CustomToggle.eventKey = "1"))
-                        }
-                      >
-                        Click me!
-                      </CustomToggle>
-                    </Card.Header>
-                    <Accordion.Collapse
-                      eventKey="1"
-                      onClick={() =>
-                        (Accordion.eventKey = "1"
-                          ? (Accordion.eventKey = "0")
-                          : (Accordion.eventKey = "1"))
-                      }
-                    >
-                      <Card.Body>Hello! I'm another body</Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
